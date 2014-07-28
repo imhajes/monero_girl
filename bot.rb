@@ -51,6 +51,14 @@ def refresh_stats
   end
 end
 
+def silence?(channel)
+  CONFIG["silencers"].each do |nick|
+    return true if channel.has_user?(nick)
+  end
+
+  false
+end
+
 bot = Cinch::Bot.new do
   configure do |c|
     c.nick = CONFIG["nick"]
@@ -59,10 +67,14 @@ bot = Cinch::Bot.new do
   end
 
   on :message, "!help" do |m|
+    next if silence?(m.channel)
+
     m.user.msg "Commands: !pools, !worth <amount>, !price, !diff, !calc <hashrate>"
   end
 
   on :message, "!pools" do |m|
+    next if silence?(m.channel)
+
     refresh_pools
     reply = "List of available Monero pools:\n\n"
 
@@ -75,24 +87,32 @@ bot = Cinch::Bot.new do
   end
 
   on :message, "!diff" do |m|
+    next if silence?(m.channel)
+
     refresh_stats
     diff = @stats["difficulty"]
     m.user.msg "Difficulty: #{diff}"
   end
 
   on :message, "!price" do |m|
+    next if silence?(m.channel)
+
     refresh_price
     m.user.msg "1 XMR equals #{@price["Poloniex"].round(8)} BTC / Poloniex"
     m.user.msg "1 XMR equals #{@price["HitBTC"].round(8)} BTC / HitBTC.com"
   end
 
   on :message, /^!worth (\d+)/ do |m, amount|
+    next if silence?(m.channel)
+
     refresh_price
     total = (amount.to_f * @price["Poloniex"].to_f).round(8)
     m.user.msg "#{amount} XMR = #{total} BTC"
   end
 
   on :message, /^!calc (\d+)/ do |m, hashrate|
+    next if silence?(m.channel)
+
     refresh_stats
     diff = @stats["difficulty"]
     total = 15 / (diff / hashrate.to_f / 86400)

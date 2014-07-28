@@ -3,6 +3,9 @@ nick: "MoneroGirl"
 channels:
   - "##hashinvest"
 
+silencers:
+  - "MoneroBot"
+
 daemon:
   rpc_host: "test.hashinvest.net"
   rpc_port: 18081
