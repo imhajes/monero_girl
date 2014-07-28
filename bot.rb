@@ -33,6 +33,9 @@ def refresh_price
       resp = RestClient.get("http://api.hitbtc.com/api/1/public/XMRBTC/ticker")
       @price["HitBTC"] = JSON.parse(resp)["last"].to_f
 
+      resp = RestClient.get("https://api.mintpal.com/v1/market/stats/XMR/BTC")
+      @price["Mintpal"] = JSON.parse(resp)[0]["last_price"].to_f
+
       @last_price_update = Time.now
     end
   end
@@ -98,8 +101,9 @@ bot = Cinch::Bot.new do
     next if silence?(m.channel)
 
     refresh_price
-    m.user.msg "1 XMR equals #{@price["Poloniex"].round(8)} BTC / Poloniex"
-    m.user.msg "1 XMR equals #{@price["HitBTC"].round(8)} BTC / HitBTC.com"
+    m.user.msg "1 XMR equals #{@price["Poloniex"].round(8)} BTC on Poloniex"
+    m.user.msg "1 XMR equals #{@price["HitBTC"].round(8)} BTC on HitBTC.com"
+    m.user.msg "1 XMR equals #{@price["Mintpal"].round(8)} BTC on Mintpal"
   end
 
   on :message, /^!worth (\d+)/ do |m, amount|
