@@ -1,0 +1,8 @@
+server: "irc.freenode.net"
+nick: "MoneroGirl"
+channels:
+  - "##hashinvest"
+
+daemon:
+  rpc_host: "test.hashinvest.net"
+  rpc_port: 18081
