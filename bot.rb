@@ -55,6 +55,8 @@ def refresh_stats
 end
 
 def silence?(channel)
+  return false if channel.nil? # private message
+
   CONFIG["silencers"].each do |nick|
     return true if channel.has_user?(nick)
   end
