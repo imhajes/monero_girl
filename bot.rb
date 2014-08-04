@@ -42,6 +42,11 @@ def refresh_price
       @price["Mintpal"]["price"] = JSON.parse(resp)[0]["last_price"].to_f.round(8)
       @price["Mintpal"]["vol"] = JSON.parse(resp)[0]["24hvol"].to_f.round(2)
 
+      resp = RestClient.get("http://data.bter.com/api/1/ticker/xmr_btc")
+      @price["Bter"] = {}
+      @price["Bter"]["price"] = JSON.parse(resp)["last"].to_f.round(8)
+      @price["Bter"]["vol"] = JSON.parse(resp)["vol_xmr"].to_f.round(2)
+
       @last_price_update = Time.now
     end
   end
@@ -112,6 +117,7 @@ bot = Cinch::Bot.new do
     m.user.msg "Last: #{@price["Poloniex"]["price"]} BTC | Volume: #{@price["Poloniex"]["vol"]} | Poloniex | https://poloniex.com/exchange/btc_xmr"
     m.user.msg "Last: #{@price["HitBTC"]["price"]} BTC | Volume: #{@price["HitBTC"]["vol"]} | HitBTC.com | https://hitbtc.com/terminal#XMRBTC"
     m.user.msg "Last: #{@price["Mintpal"]["price"]} BTC | Volume: #{@price["Mintpal"]["vol"]} | Mintpal | https://www.mintpal.com/market/XMR/BTC"
+    m.user.msg "Last: #{@price["Bter"]["price"]} BTC | Volume: #{@price["Bter"]["vol"]} | Bter | https://bter.com/trade/XMR_BTC"
   end
 
   on :message, /^!worth (\d+)/ do |m, amount|
