@@ -114,10 +114,10 @@ bot = Cinch::Bot.new do
     next if silence?(m.channel)
 
     refresh_price
-    m.user.msg "Last: #{@price["Poloniex"]["price"]} BTC | Volume: #{@price["Poloniex"]["vol"]} | Poloniex | https://poloniex.com/exchange/btc_xmr"
-    m.user.msg "Last: #{@price["HitBTC"]["price"]} BTC | Volume: #{@price["HitBTC"]["vol"]} | HitBTC.com | https://hitbtc.com/terminal#XMRBTC"
-    m.user.msg "Last: #{@price["Mintpal"]["price"]} BTC | Volume: #{@price["Mintpal"]["vol"]} | Mintpal | https://www.mintpal.com/market/XMR/BTC"
-    m.user.msg "Last: #{@price["Bter"]["price"]} BTC | Volume: #{@price["Bter"]["vol"]} | Bter | https://bter.com/trade/XMR_BTC"
+    m.user.msg "Last: #{@price["Poloniex"]["price"]} BTC | Volume: #{@price["Poloniex"]["vol"]} BTC | Poloniex | https://poloniex.com/exchange/btc_xmr"
+    m.user.msg "Last: #{@price["HitBTC"]["price"]} BTC | Volume: #{@price["HitBTC"]["vol"]} XMR | HitBTC.com | https://hitbtc.com/terminal#XMRBTC"
+    m.user.msg "Last: #{@price["Mintpal"]["price"]} BTC | Volume: #{@price["Mintpal"]["vol"]} BTC | Mintpal | https://www.mintpal.com/market/XMR/BTC"
+    m.user.msg "Last: #{@price["Bter"]["price"]} BTC | Volume: #{@price["Bter"]["vol"]} XMR | Bter | https://bter.com/trade/XMR_BTC"
   end
 
   on :message, /^!worth (\d+)/ do |m, amount|
