@@ -93,7 +93,7 @@ bot = Cinch::Bot.new do
     next if silence?(m.channel)
 
     refresh_pools
-    reply = "List of available Monero pools:\n\n"
+    reply = "List of available Monero pools (randomized):\n\n"
 
     @pools.shuffle.each do |pool|
       name = pool.keys[0]
@@ -101,6 +101,7 @@ bot = Cinch::Bot.new do
     end
 
     m.user.msg reply
+    m.user.msg "Send pull-request with your pool to https://github.com/sammy007/monero_girl"
   end
 
   on :message, "!diff" do |m|
