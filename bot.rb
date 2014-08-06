@@ -78,6 +78,7 @@ end
 bot = Cinch::Bot.new do
   configure do |c|
     c.nick = CONFIG["nick"]
+    c.password = CONFIG["password"]
     c.server = CONFIG["server"]
     c.channels = CONFIG["channels"]
   end

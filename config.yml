@@ -1,5 +1,6 @@
 server: "irc.freenode.net"
 nick: "MoneroGirl"
+password: "SECURE_IRC_PASSWORD"
 channels:
   - "##hashinvest"
 
