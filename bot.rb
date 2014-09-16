@@ -135,7 +135,7 @@ bot = Cinch::Bot.new do
 
     refresh_stats
     diff = @stats["difficulty"]
-    total = 15 / (diff / hashrate.to_f / 86400)
+    total = 14.3 / (diff / hashrate.to_f / 86400)
     m.user.msg "With #{hashrate} H/s you will mine ~#{total.round(8)} XMR per day"
   end
 end
