@@ -6,7 +6,7 @@ module MoneroGirl
       synchronize(:market) do
         @price ||= {}
 
-        if (@last_price_update.nil? || (Time.now - @last_price_update > 180))
+        refresh(:market, 180) do
           resp = RestClient.get("https://poloniex.com/public?command=returnTicker")
           @price["Poloniex"] = {}
           @price["Poloniex"]["price"] = JSON.parse(resp)["BTC_XMR"]["last"].to_f.round(8)
@@ -26,8 +26,6 @@ module MoneroGirl
           @price["Bter"] = {}
           @price["Bter"]["price"] = JSON.parse(resp)["last"].to_f.round(8)
           @price["Bter"]["vol"] = JSON.parse(resp)["vol_xmr"].to_f.round(2)
-
-          @last_price_update = Time.now
         end
       end
     end

@@ -15,13 +15,11 @@ module MoneroGirl
 
     def refresh_stats
       synchronize(:stats) do
-        if (@last_stats_update.nil? || (Time.now - @last_stats_update > 60))
+        refresh(:stats, 60) do
           url = "http://#{CONFIG["daemon"]["rpc_host"]}:#{CONFIG["daemon"]["rpc_port"]}/json_rpc"
           body = { "jsonrpc" => "2.0", "id" => "test", "method" => "get_info" }
           resp = RestClient.post(url, body.to_json)
           @stats = JSON.parse(resp)["result"]
-
-          @last_stats_update = Time.now
         end
       end
     end

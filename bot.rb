@@ -13,6 +13,15 @@ require "monero_girl"
 
 CONFIG = YAML.load_file(File.expand_path("config.yml"))
 POOLS_FILE = File.expand_path("pools.yml")
+$memo = {}
+
+def refresh(key, seconds)
+  if ($memo[key].nil? || (Time.now - $memo[key] > seconds))
+    puts "refreshing #{key}"
+    yield
+    $memo[key] = Time.now
+  end
+end
 
 def silence?(channel)
   return false if channel.nil? # private message
