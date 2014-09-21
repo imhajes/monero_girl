@@ -30,7 +30,7 @@ module MoneroGirl
     def help(m)
       return if silence?(m.channel)
 
-      m.user.msg "Commands: !pools, !worth <amount>, !price, !diff, !calc <hashrate>"
+      m.user.msg "Commands: !pools, !worth <amount>, !price, !net, !calc <hashrate>"
     end
 
     match "pools", :method => :pools
@@ -49,8 +49,8 @@ module MoneroGirl
       m.user.msg "Send pull-request with your pool to https://github.com/sammy007/monero_girl"
     end
 
-    match "diff", :method => :diff
-    def diff(m)
+    match "net", :method => :net
+    def net(m)
       return if silence?(m.channel)
 
       refresh_stats
