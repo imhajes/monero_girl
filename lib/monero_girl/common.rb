@@ -55,7 +55,8 @@ module MoneroGirl
 
       refresh_stats
       diff = @stats["difficulty"]
-      m.user.msg "Difficulty: #{diff}"
+      nethash = diff / 60.0 / 1000000.0
+      m.user.msg "Difficulty: #{diff}, Network hashrate: #{nethash.round(2)} Mh/s"
     end
 
     match /calc (\d+)/, :method => :calc
