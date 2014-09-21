@@ -67,8 +67,12 @@ module MoneroGirl
       return if silence?(m.channel)
 
       refresh_price
-      total = amount.to_f * @markets["Poloniex"][:price].to_f
-      m.user.msg "#{amount} XMR = #{total} BTC"
+
+      @markets.each_value do |e|
+        next unless e[:price]
+        total = amount.to_f * e[:price].to_f
+        m.user.msg "#{amount} XMR = #{total} BTC | #{e[:name]}"
+      end
     end
   end
 end
