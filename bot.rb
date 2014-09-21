@@ -14,8 +14,6 @@ require "monero_girl"
 CONFIG = YAML.load_file(File.expand_path("config.yml"))
 POOLS_FILE = File.expand_path("pools.yml")
 
-LOCK = Mutex.new
-
 def silence?(channel)
   return false if channel.nil? # private message
 

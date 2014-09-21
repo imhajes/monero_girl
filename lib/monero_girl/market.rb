@@ -3,7 +3,7 @@ module MoneroGirl
     include Cinch::Plugin
 
     def refresh_price
-      LOCK.synchronize do
+      synchronize(:market) do
         @price ||= {}
 
         if (@last_price_update.nil? || (Time.now - @last_price_update > 180))

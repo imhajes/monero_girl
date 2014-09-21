@@ -3,7 +3,7 @@ module MoneroGirl
     include Cinch::Plugin
 
     def refresh_pools
-      LOCK.synchronize do
+      synchronize(:pools) do
         ctime = File.ctime(POOLS_FILE)
 
         if (@pools_ctime.nil? || (@pools_ctime != ctime))
@@ -14,7 +14,7 @@ module MoneroGirl
     end
 
     def refresh_stats
-      LOCK.synchronize do
+      synchronize(:stats) do
         if (@last_stats_update.nil? || (Time.now - @last_stats_update > 60))
           url = "http://#{CONFIG["daemon"]["rpc_host"]}:#{CONFIG["daemon"]["rpc_port"]}/json_rpc"
           body = { "jsonrpc" => "2.0", "id" => "test", "method" => "get_info" }
