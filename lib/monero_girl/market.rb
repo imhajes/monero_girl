@@ -27,25 +27,37 @@ module MoneroGirl
     def refresh_price
       synchronize(:market) do
         refresh(:market, 180) do
-          resp = RestClient.get("https://poloniex.com/public?command=returnTicker")
-          resp = JSON.parse(resp)
-          @markets["Poloniex"][:price] = resp["BTC_XMR"]["last"].to_f.round(8)
-          @markets["Poloniex"][:vol] = resp["BTC_XMR"]["baseVolume"].to_f.round(2)
+          begin
+            resp = RestClient.get("https://poloniex.com/public?command=returnTicker")
+            resp = JSON.parse(resp)
+            @markets["Poloniex"][:price] = resp["BTC_XMR"]["last"].to_f.round(8)
+            @markets["Poloniex"][:vol] = resp["BTC_XMR"]["baseVolume"].to_f.round(2)
+          rescue
+          end
 
-          resp = RestClient.get("http://api.hitbtc.com/api/1/public/XMRBTC/ticker")
-          resp = JSON.parse(resp)
-          @markets["HitBTC"][:price] = resp["last"].to_f.round(8)
-          @markets["HitBTC"][:vol] = resp["volume"].to_f.round(2)
+          begin
+            resp = RestClient.get("http://api.hitbtc.com/api/1/public/XMRBTC/ticker")
+            resp = JSON.parse(resp)
+            @markets["HitBTC"][:price] = resp["last"].to_f.round(8)
+            @markets["HitBTC"][:vol] = resp["volume"].to_f.round(2)
+          rescue
+          end
 
-          resp = RestClient.get("https://api.mintpal.com/v1/market/stats/XMR/BTC")
-          resp = JSON.parse(resp)
-          @markets["Mintpal"][:price] = resp[0]["last_price"].to_f.round(8)
-          @markets["Mintpal"][:vol] = resp[0]["24hvol"].to_f.round(2)
+          begin
+            resp = RestClient.get("https://api.mintpal.com/v1/market/stats/XMR/BTC")
+            resp = JSON.parse(resp)
+            @markets["Mintpal"][:price] = resp[0]["last_price"].to_f.round(8)
+            @markets["Mintpal"][:vol] = resp[0]["24hvol"].to_f.round(2)
+          rescue
+          end
 
-          resp = RestClient.get("http://data.bter.com/api/1/ticker/xmr_btc")
-          resp = JSON.parse(resp)
-          @markets["Bter"][:price] = resp["last"].to_f.round(8)
-          @markets["Bter"][:vol] = resp["vol_xmr"].to_f.round(2)
+          begin
+            resp = RestClient.get("http://data.bter.com/api/1/ticker/xmr_btc")
+            resp = JSON.parse(resp)
+            @markets["Bter"][:price] = resp["last"].to_f.round(8)
+            @markets["Bter"][:vol] = resp["vol_xmr"].to_f.round(2)
+          rescue
+          end
         end
       end
     end
