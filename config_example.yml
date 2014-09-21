@@ -2,11 +2,12 @@ server: "irc.freenode.net"
 nick: "MoneroGirl"
 password: "SECURE_IRC_PASSWORD"
 channels:
-  - "##hashinvest"
+  - "#monero"
+  - "#monero-pools"
 
 silencers:
   - "MoneroBot"
 
 daemon:
-  rpc_host: "test.hashinvest.net"
+  rpc_host: "127.0.0.1"
   rpc_port: 18081
