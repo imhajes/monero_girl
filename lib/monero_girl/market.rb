@@ -12,10 +12,6 @@ module MoneroGirl
           :name => "HitBTC.com",
           :url => "https://hitbtc.com/terminal#XMRBTC"
         },
-        "Mintpal" => {
-          :name => "Mintpal",
-          :url => "https://www.mintpal.com/market/XMR/BTC"
-        },
         "Bter" => {
           :name => "Bter",
           :url => "https://bter.com/trade/XMR_BTC"
@@ -44,14 +40,6 @@ module MoneroGirl
             resp = JSON.parse(resp)
             @markets["HitBTC"][:price] = resp["last"].to_f.round(8)
             @markets["HitBTC"][:vol] = resp["volume"].to_f.round(2)
-          rescue
-          end
-
-          begin
-            resp = RestClient.get("https://api.mintpal.com/v1/market/stats/XMR/BTC")
-            resp = JSON.parse(resp)
-            @markets["Mintpal"][:price] = resp[0]["last_price"].to_f.round(8)
-            @markets["Mintpal"][:vol] = resp[0]["24hvol"].to_f.round(2)
           rescue
           end
 
