@@ -39,7 +39,7 @@ module MoneroGirl
             resp = RestClient.get("http://api.hitbtc.com/api/1/public/XMRBTC/ticker")
             resp = JSON.parse(resp)
             @markets["HitBTC"][:price] = resp["last"].to_f.round(8)
-            @markets["HitBTC"][:vol] = resp["volume"].to_f.round(2)
+            @markets["HitBTC"][:vol] = resp["volume_quote"].to_f.round(2)
           rescue
           end
 
@@ -47,7 +47,7 @@ module MoneroGirl
             resp = RestClient.get("http://data.bter.com/api/1/ticker/xmr_btc")
             resp = JSON.parse(resp)
             @markets["Bter"][:price] = resp["last"].to_f.round(8)
-            @markets["Bter"][:vol] = resp["vol_xmr"].to_f.round(2)
+            @markets["Bter"][:vol] = resp["vol_btc"].to_f.round(2)
           rescue
           end
 
