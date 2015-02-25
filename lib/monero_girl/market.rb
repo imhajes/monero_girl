@@ -11,10 +11,6 @@ module MoneroGirl
         "HitBTC" => {
           :name => "HitBTC.com",
           :url => "https://hitbtc.com/terminal#XMRBTC"
-        },
-        "Bter" => {
-          :name => "Bter",
-          :url => "https://bter.com/trade/XMR_BTC"
         }
       }
       super(bot)
@@ -36,14 +32,6 @@ module MoneroGirl
             resp = JSON.parse(resp)
             @markets["HitBTC"][:price] = resp["last"].to_f.round(8)
             @markets["HitBTC"][:vol] = resp["volume_quote"].to_f.round(2)
-          rescue
-          end
-
-          begin
-            resp = RestClient.get("http://data.bter.com/api/1/ticker/xmr_btc")
-            resp = JSON.parse(resp)
-            @markets["Bter"][:price] = resp["last"].to_f.round(8)
-            @markets["Bter"][:vol] = resp["vol_btc"].to_f.round(2)
           rescue
           end
         end
