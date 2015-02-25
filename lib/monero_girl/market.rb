@@ -15,10 +15,6 @@ module MoneroGirl
         "Bter" => {
           :name => "Bter",
           :url => "https://bter.com/trade/XMR_BTC"
-        },
-        "CoinSwap" => {
-          :name => "Coin-Swap",
-          :url => "https://coin-swap.net/market/XMR/BTC"
         }
       }
       super(bot)
@@ -48,14 +44,6 @@ module MoneroGirl
             resp = JSON.parse(resp)
             @markets["Bter"][:price] = resp["last"].to_f.round(8)
             @markets["Bter"][:vol] = resp["vol_btc"].to_f.round(2)
-          rescue
-          end
-
-          begin
-            resp = RestClient::Request.execute(:url => "https://api.coin-swap.net/market/stats/XMR/BTC", :method => :get, :verify_ssl => false)
-            resp = JSON.parse(resp)
-            @markets["CoinSwap"][:price] = resp["lastprice"].to_f.round(8)
-            @markets["CoinSwap"][:vol] = resp["dayvolume"].to_f.round(2)
           rescue
           end
         end
