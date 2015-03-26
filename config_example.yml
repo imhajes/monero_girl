@@ -9,5 +9,5 @@ silencers:
   - "MoneroBot"
 
 daemon:
-  rpc_host: "127.0.0.1"
-  rpc_port: 18081
+  rpc_host: "node.moneroclub.com"
+  rpc_port: 8880
