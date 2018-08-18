@@ -1,6 +1,8 @@
 server: "irc.freenode.net"
-nick: "MoneroGirl"
-password: "SECURE_IRC_PASSWORD"
+nick: 
+  - "MoneroGirl"
+  - "saudi45ert"
+  - "kuwait897"
 channels:
   - "#monero"
   - "#monero-pools"
