@@ -1,13 +1,15 @@
-server: "irc.freenode.net"
-nick: "MoneroGirl"
-password: "SECURE_IRC_PASSWORD"
+server: "irc.dal.net"
+nick: 
+  - "MoneroGirl"
+  - "saudi567"
+  - "dfrert654"
+  - "creat345"
+  - "cvvrt234"
 channels:
-  - "#monero"
-  - "#monero-pools"
+  - "#go"
+  - "#king"
 
 silencers:
   - "MoneroBot"
 
-daemon:
-  rpc_host: "node.moneroclub.com"
-  rpc_port: 8880
+
